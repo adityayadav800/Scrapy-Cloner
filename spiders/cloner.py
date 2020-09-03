@@ -5,7 +5,7 @@ import os
 class QuotesSpider(scrapy.Spider):
         name = "cloner"
         start_urls = [
-                'https://www.w3schools.com/'
+                'https://www.ahlawatassociates.com/'
                         ]
         def parse(self, response):
             print(response.url)
