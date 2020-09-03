@@ -5,7 +5,7 @@ import os
 class QuotesSpider(scrapy.Spider):
         name = "cloner"
         start_urls = [
-                'https://adityayadav800.github.io/JHU-HCJ-Assignments/Assignment3-solution/index.html'
+                'https://www.w3schools.com/'
                         ]
         def parse(self, response):
             print(response.url)
@@ -42,9 +42,12 @@ class QuotesSpider(scrapy.Spider):
                         else:
                             s=s+'/'+y[i]
                     #print(s)
-                    if(not os.path.isdir(s)):
+                    try:
+                        if(not os.path.isdir(s)):
                             os.makedirs(s)
-                    open(addr,'wb').write(res.content)
+                        open(addr,'wb').write(res.content)
+                    except:
+                        print(s,"Same Prob")
                 else:
                     res=requests.get(url)
                     x=url.split('/',3)
@@ -58,9 +61,12 @@ class QuotesSpider(scrapy.Spider):
                         else:
                             s=s+'/'+y[i]
                     print(s)
-                    if(not os.path.isdir(s)):
-                        os.makedirs(s)
-                    open(x[3],'wb').write(res.content)
+                    try:
+                        if(not os.path.isdir(s)):
+                            os.makedirs(s)
+                        open(x[3],'wb').write(res.content)
+                    except:
+                        print(s,"perm Denied")
             ecss=response.xpath('//link[@rel=\'stylesheet\' or  @type=\'text/css\']/@href').extract()
             print(ecss)
             for url in ecss:
@@ -102,10 +108,12 @@ class QuotesSpider(scrapy.Spider):
                         else:
                             s=s+'/'+y[i]
                             print(s)
-                    if(not os.path.isdir(s)):
-                        os.makedirs(s)
-                    open(x[3],'wb').write(res.content)
-
+                    try:
+                        if(not os.path.isdir(s)):
+                            os.makedirs(s)
+                        open(x[3],'wb').write(res.content)
+                    except:
+                        print(s,'Perm')
             icss=response.xpath('//style[@type=\'text/css\']/text()').extract()
             ind=open('index.html','w')
             ind.write(response.text)
